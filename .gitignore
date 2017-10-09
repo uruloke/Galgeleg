@@ -2,4 +2,13 @@
 /.idea/
 /nbproject/
 build.xml
-
+out/
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
