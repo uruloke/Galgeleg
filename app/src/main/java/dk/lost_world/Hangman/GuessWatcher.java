@@ -48,25 +48,28 @@ public class GuessWatcher implements TextWatcher {
     private void setHangmanImageByWrongGuesses() {
         switch (hangman.wrongGuesses()) {
             case 0:
-                hangmanView.setImageResource(R.drawable.gallow);
+                hangmanView.setImageResource(R.drawable.wrong_guess_0);
                 break;
             case 1:
-                hangmanView.setImageResource(R.drawable.wrong_guess1);
+                hangmanView.setImageResource(R.drawable.wrong_guess_1);
                 break;
             case 2:
-                hangmanView.setImageResource(R.drawable.wrong_guess2);
+                hangmanView.setImageResource(R.drawable.wrong_guess_2);
                 break;
             case 3:
-                hangmanView.setImageResource(R.drawable.wrong_guess3);
+                hangmanView.setImageResource(R.drawable.wrong_guess_3);
                 break;
             case 4:
-                hangmanView.setImageResource(R.drawable.wrong_guess4);
+                hangmanView.setImageResource(R.drawable.wrong_guess_4);
                 break;
             case 5:
-                hangmanView.setImageResource(R.drawable.wrong_guess5);
+                hangmanView.setImageResource(R.drawable.wrong_guess_5);
                 break;
             case 6:
-                hangmanView.setImageResource(R.drawable.wrong_guess6);
+                hangmanView.setImageResource(R.drawable.wrong_guess_6);
+                break;
+            case 7:
+                hangmanView.setImageResource(R.drawable.wrong_guess_7);
                 break;
         }
     }
