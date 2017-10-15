@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 
+import dk.lost_world.Hangman.Hangman.Hangman;
+
 public class GuessWatcher implements TextWatcher {
 
     protected TextView word;
@@ -37,16 +39,6 @@ public class GuessWatcher implements TextWatcher {
 
         word.setText(StringUtils.replace(hangman.currentVisibleWord(), "*", "_ "));
         guess.setText("");
-
-        if (hangman.gameDone()) {
-            if(hangman.gameWon()) {
-                word.setText("WON!");
-            }
-            else {
-                word.setText("LOST!");
-            }
-            return;
-        }
 
         setHangmanImageByWrongGuesses();
 

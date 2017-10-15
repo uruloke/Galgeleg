@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "605114816739",
+    "firebase_url": "https://galgeleg-874e2.firebaseio.com",
+    "project_id": "galgeleg-874e2",
+    "storage_bucket": "galgeleg-874e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605114816739:android:e82c122b46cda533",
+        "android_client_info": {
+          "package_name": "dk.lost_world.Hangman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605114816739-qomba3vipo4rk0n51mck18qgdmdh9nae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dk.lost_world.Hangman",
+            "certificate_hash": "095a18e394a91cab858e344bd68c64d4f6fcd185"
+          }
+        },
+        {
+          "client_id": "605114816739-uvupqqdtnggakt53tro7it4jjv0q9nsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBroFI0JzAdj1vMvOjslnaJo9oKMGS4kYw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605114816739-uvupqqdtnggakt53tro7it4jjv0q9nsf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

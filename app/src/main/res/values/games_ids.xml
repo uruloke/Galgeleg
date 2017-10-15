@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <!-- app_id -->
+    <string name="app_id" translatable="false">522678802897</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">dk.lost_world.Hangman</string>
+    <!-- leaderboard score -->
+    <string name="leaderboard_score" translatable="false">CgkI0bPWkJsPEAIQAQ</string>
+
+    <string name="google_maps_key">test</string>
+</resources>
