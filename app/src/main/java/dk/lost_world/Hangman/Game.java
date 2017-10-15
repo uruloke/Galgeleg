@@ -82,7 +82,7 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
 
         if(hangman.gameWon()) {
             long time = SystemClock.elapsedRealtime() - mChronometer.getBase();
-            long score =  time / (hangman.wrongGuesses()+1);
+            long score =  time * (hangman.wrongGuesses()+1);
             message = getString(R.string.game_won, score, time / 1000, hangman.wrongGuesses());
 
             Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_score), score);
