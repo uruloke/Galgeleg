@@ -86,7 +86,7 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
     @Override
     public void onGameDone(@NonNull HangmanWrapper hangman, boolean wonGame) {
         mChronometer.stop();
-        String message = getString(R.string.game_lost);
+        String message = getString(R.string.game_lost, hangman.word());
 
         if(hangman.gameWon()) {
             long time = SystemClock.elapsedRealtime() - mChronometer.getBase();
