@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +34,6 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
     private GoogleApiClient mGoogleApiClient;
     protected HangmanWrapper hangman;
     protected TextView word;
-    protected EditText guess;
     protected ImageView hangmanView;
     private Chronometer mChronometer;
 
@@ -42,7 +43,6 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
         setContentView(R.layout.activity_game);
         hangmanView = findViewById(R.id.hangmanView);
         mChronometer = findViewById(R.id.gameTime);
-        guess = findViewById(R.id.guessLetter);
         word = findViewById(R.id.word);
 
         hangman = new HangmanWrapper();
@@ -50,7 +50,6 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
         hangman.addGameStartCallback(this);
 
         word.setText(StringUtils.repeat("_ ", hangman.word().length()));
-        guess.addTextChangedListener(new GuessWatcher(word, guess, hangmanView, hangman));
 
         // Create the Google Api Client with access to Games
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -61,6 +60,15 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
 
 
         hangman.start();
+    }
+
+    public void guessWord(View view) {
+        Button button = ((Button) view);
+        hangman.guess(Character.toLowerCase(button.getText().charAt(0)));
+        word.setText(StringUtils.replace(hangman.currentVisibleWord(), "*", "_ "));
+
+        setHangmanImageByWrongGuesses();
+        button.setEnabled(false);
     }
 
     @Override
@@ -120,5 +128,34 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.e("Connection failed", connectionResult.toString());
+    }
+
+    private void setHangmanImageByWrongGuesses() {
+        switch (hangman.wrongGuesses()) {
+            case 0:
+                hangmanView.setImageResource(R.drawable.wrong_guess_0);
+                break;
+            case 1:
+                hangmanView.setImageResource(R.drawable.wrong_guess_1);
+                break;
+            case 2:
+                hangmanView.setImageResource(R.drawable.wrong_guess_2);
+                break;
+            case 3:
+                hangmanView.setImageResource(R.drawable.wrong_guess_3);
+                break;
+            case 4:
+                hangmanView.setImageResource(R.drawable.wrong_guess_4);
+                break;
+            case 5:
+                hangmanView.setImageResource(R.drawable.wrong_guess_5);
+                break;
+            case 6:
+                hangmanView.setImageResource(R.drawable.wrong_guess_6);
+                break;
+            case 7:
+                hangmanView.setImageResource(R.drawable.wrong_guess_7);
+                break;
+        }
     }
 }

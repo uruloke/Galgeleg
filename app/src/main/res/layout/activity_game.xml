@@ -11,36 +11,21 @@
         android:layout_width="164dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/hangmanView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/wrong_guess_0"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:contentDescription="@string/hangmanView" />
-
-    <EditText
-        android:id="@+id/guessLetter"
-        android:layout_width="81dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:maxLength="1"
-        android:inputType="textPersonName"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="105dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
-        android:labelFor="@+id/guessLetter"
         android:id="@+id/word"
         android:layout_width="231dp"
         android:layout_height="65dp"
         android:gravity="center"
+        android:labelFor="@+id/guessLetter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -54,14 +39,217 @@
         android:id="@+id/gameTime"
         android:layout_width="51dp"
         android:layout_height="28dp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
         android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
 
-        tools:layout_editor_absoluteX="344dp" />
+        />
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="330dp"
+        android:layout_height="245dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginStart="14dp"
+        android:columnCount="6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/press_a"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="A" />
+
+        <Button
+            android:id="@+id/press_b"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="B" />
+
+        <Button
+            android:id="@+id/press_d"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="D" />
+
+        <Button
+            android:id="@+id/press_e"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="E" />
+
+        <Button
+            android:id="@+id/press_f"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="F" />
+
+        <Button
+            android:id="@+id/press_g"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="G" />
+
+        <Button
+            android:id="@+id/press_i"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="I" />
+
+        <Button
+            android:id="@+id/press_j"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="J" />
+
+        <Button
+            android:id="@+id/press_k"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="K" />
+
+        <Button
+            android:id="@+id/press_l"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="L" />
+
+        <Button
+            android:id="@+id/press_m"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="M" />
+
+        <Button
+            android:id="@+id/press_n"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="N" />
+
+        <Button
+            android:id="@+id/press_o"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="O" />
+
+        <Button
+            android:id="@+id/press_p"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="P" />
+
+        <Button
+            android:id="@+id/press_q"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="Q" />
+
+        <Button
+            android:id="@+id/press_r"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="R" />
+
+        <Button
+            android:id="@+id/press_s"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="S" />
+
+        <Button
+            android:id="@+id/press_t"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="T" />
+
+        <Button
+            android:id="@+id/press_u"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="U" />
+
+        <Button
+            android:id="@+id/press_v"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="V" />
+
+        <Button
+            android:id="@+id/press_w"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="W" />
+
+        <Button
+            android:id="@+id/press_x"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="X" />
+
+        <Button
+            android:id="@+id/press_y"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="Y" />
+
+        <Button
+            android:id="@+id/press_z"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="Z" />
+
+        <Button
+            android:id="@+id/press_æ"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="Æ" />
+
+        <Button
+            android:id="@+id/press_ø"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="Ø" />
+
+        <Button
+            android:id="@+id/press_å"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:onClick="guessWord"
+            android:text="Å" />
+
+    </GridLayout>
 
 
 </android.support.constraint.ConstraintLayout>
