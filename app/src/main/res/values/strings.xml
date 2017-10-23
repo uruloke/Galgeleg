@@ -12,7 +12,4 @@
     <string name="license_failed">License check failed.</string>
     <string name="game_won">You won. \n\n Score: %1$d \n Time: %2$d \n Wrong guesses: %3$d</string>
     <string name="game_lost">Too many wrong guesses. \n word was: %1$s</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
