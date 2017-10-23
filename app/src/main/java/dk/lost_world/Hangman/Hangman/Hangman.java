@@ -1,8 +1,5 @@
 package dk.lost_world.Hangman.Hangman;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public class Hangman {
+class Hangman {
     private ArrayList<String> possibleWords = new ArrayList<>();
     private String word;
     private ArrayList<String> usedLetters = new ArrayList<>();
@@ -76,7 +73,6 @@ public class Hangman {
         updateVisibleWord();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateVisibleWord() {
         visibleWord = "";
         wonGame = true;

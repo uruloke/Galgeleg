@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/windowBackground"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="dk.lost_world.Hangman.MainActivity">
+    <Button
+        android:id="@+id/start"
+        android:layout_width="0dp"
+        android:layout_height="95dp"
+        android:text="@string/start"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="67dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="67dp"
+        android:layout_marginBottom="187dp" />
+
+    <Button
+        android:id="@+id/Scoreboard"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:text="@string/scoreboard"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="65dp"
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginStart="67dp"
+        android:layout_marginEnd="67dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/homescreen_image"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/start"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="33dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="" />
+
+</android.support.constraint.ConstraintLayout>

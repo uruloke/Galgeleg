@@ -8,7 +8,13 @@ public class HangmanWrapper extends Hangman {
     private ArrayList<OnGameStartListener> gameStartListeners;
     private boolean started = false;
 
-    public HangmanWrapper() {
+    private static final HangmanWrapper instance = new HangmanWrapper();
+
+    public static HangmanWrapper getInstance() {
+        return instance;
+    }
+
+    private HangmanWrapper() {
         super();
         gameDoneListeners = new ArrayList<>();
         gameStartListeners = new ArrayList<>();

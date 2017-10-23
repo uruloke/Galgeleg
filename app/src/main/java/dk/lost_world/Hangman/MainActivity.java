@@ -1,26 +1,28 @@
 package dk.lost_world.Hangman;
 
-import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
+import dk.lost_world.Hangman.Hangman.HangmanWrapper;
+
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    private GoogleApiClient mGoogleApiClient;
+    public static GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activiy_main);
 
         // Create the Google Api Client with access to Games
@@ -29,17 +31,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 .build();
+
+        getFragmentManager().beginTransaction()
+                .add(R.id.fragmentView, new Menu())
+                .commit();
     }
 
-    public void startGame(View view) {
-        Intent intent = new Intent(this, Game.class);
-        startActivity(intent);
-    }
-
-    public void launchScoreBoard(View view) {
-        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
-                getString(R.string.leaderboard_score)), 100);
-    }
 
     @Override
     protected void onStart() {
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        findViewById(R.id.Scoreboard).setVisibility(View.VISIBLE);
     }
 
     @Override

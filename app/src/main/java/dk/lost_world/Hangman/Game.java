@@ -1,86 +1,60 @@
 package dk.lost_world.Hangman;
 
+
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.app.Fragment;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.games.Games;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 
 import dk.lost_world.Hangman.Hangman.HangmanWrapper;
 import dk.lost_world.Hangman.Hangman.OnGameDoneListener;
 import dk.lost_world.Hangman.Hangman.OnGameStartListener;
 
-public class Game extends AppCompatActivity implements OnGameDoneListener, OnGameStartListener, ConnectionCallbacks, OnConnectionFailedListener {
+import static dk.lost_world.Hangman.MainActivity.mGoogleApiClient;
 
-    private GoogleApiClient mGoogleApiClient;
+public class Game extends Fragment implements OnGameDoneListener, OnGameStartListener, View.OnClickListener {
+
     protected HangmanWrapper hangman;
     protected TextView word;
     protected ImageView hangmanView;
     private Chronometer mChronometer;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-        hangmanView = findViewById(R.id.hangmanView);
-        mChronometer = findViewById(R.id.gameTime);
-        word = findViewById(R.id.word);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_game, container, false);
 
-        hangman = new HangmanWrapper();
+        hangman = HangmanWrapper.getInstance();
+        hangmanView = root.findViewById(R.id.hangmanView);
+        mChronometer = root.findViewById(R.id.gameTime);
+        word = root.findViewById(R.id.word);
+
         hangman.addGameDoneCallback(this);
         hangman.addGameStartCallback(this);
 
         word.setText(StringUtils.repeat("_ ", hangman.word().length()));
 
-        // Create the Google Api Client with access to Games
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .build();
-
+        ArrayList<View> allButtons;
+        allButtons = root.findViewById(R.id.gridLayout).getTouchables();
+        allButtons.forEach(view -> view.setOnClickListener(this));
 
         hangman.start();
-    }
-
-    public void guessWord(View view) {
-        Button button = ((Button) view);
-        hangman.guess(Character.toLowerCase(button.getText().charAt(0)));
-        word.setText(StringUtils.replace(hangman.currentVisibleWord(), "*", "_ "));
-
-        setHangmanImageByWrongGuesses();
-        button.setEnabled(false);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mGoogleApiClient.disconnect();
+        return root;
     }
 
     @Override
@@ -96,12 +70,14 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
             Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_score), score);
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(message);
         builder.setCancelable(false);
         builder.setPositiveButton("OK", (dialog, id) -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            getFragmentManager().beginTransaction()
+                    .remove(this)
+                    .add(R.id.fragmentView, new Menu())
+                    .commit();
         });
         AlertDialog alert = builder.create();
         alert.show();
@@ -117,17 +93,13 @@ public class Game extends AppCompatActivity implements OnGameDoneListener, OnGam
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
-    }
+    public void onClick(View v) {
+        Button button = ((Button) v);
+        hangman.guess(Character.toLowerCase(button.getText().charAt(0)));
+        word.setText(StringUtils.replace(hangman.currentVisibleWord(), "*", "_ "));
 
-    @Override
-    public void onConnectionSuspended(int i) {
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("Connection failed", connectionResult.toString());
+        setHangmanImageByWrongGuesses();
+        button.setEnabled(false);
     }
 
     private void setHangmanImageByWrongGuesses() {
