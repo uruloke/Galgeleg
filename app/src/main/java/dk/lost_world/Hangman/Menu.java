@@ -33,6 +33,8 @@ public class Menu extends Fragment implements View.OnClickListener, GoogleApiCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
 
+        System.out.println(savedInstanceState);
+
         playButton = root.findViewById(R.id.start);
         playButton.setOnClickListener(this);
 
@@ -59,7 +61,7 @@ public class Menu extends Fragment implements View.OnClickListener, GoogleApiCli
         getFragmentManager().beginTransaction()
                 .add(R.id.fragmentView, new Game())
                 .addToBackStack("StartGame")
-                .remove(this)
+                .hide(this)
                 .commit();
     }
 

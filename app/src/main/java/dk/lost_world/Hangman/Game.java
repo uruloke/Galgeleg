@@ -56,9 +56,15 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
         return root;
     }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        hangman.removeGameStartCallback(this).removeGameDoneCallback(this);
+    }
+
     @Override
     public void onGameDone(@NonNull HangmanWrapper hangman, boolean wonGame) {
-        hangman.removeGameDoneCallback(this).removeGameStartCallback(this);
         mChronometer.stop();
         String message = getString(R.string.game_lost, hangman.word());
 
