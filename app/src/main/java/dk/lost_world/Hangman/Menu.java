@@ -20,10 +20,6 @@ import dk.lost_world.Hangman.Hangman.OnFetchedWordsFailedListener;
 
 import static dk.lost_world.Hangman.MainActivity.mGoogleApiClient;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Menu extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, OnFetchedWordsDoneListener, OnFetchedWordsFailedListener {
 
     private Button playButton;

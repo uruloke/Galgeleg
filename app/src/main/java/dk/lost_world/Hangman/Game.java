@@ -1,12 +1,12 @@
 package dk.lost_world.Hangman;
 
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +60,7 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        hangman.reset();
         hangman.removeGameStartCallback(this).removeGameDoneCallback(this);
     }
 
@@ -76,14 +77,9 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
             Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_score), score);
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(message);
-        builder.setCancelable(false);
-        builder.setPositiveButton("OK", (dialog, id) ->
-                getFragmentManager().popBackStack()
-        );
-        AlertDialog alert = builder.create();
-        alert.show();
+        GameDoneDialog dialog = GameDoneDialog.newInstance(message);
+
+        dialog.show(getFragmentManager(), "gameDoneDialog");
     }
 
     @Override
