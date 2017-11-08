@@ -44,8 +44,7 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
         mChronometer = root.findViewById(R.id.gameTime);
         word = root.findViewById(R.id.word);
 
-        hangman.addGameDoneCallback(this);
-        hangman.addGameStartCallback(this);
+        hangman.addGameDoneCallback(this).addGameStartCallback(this);
 
         word.setText(StringUtils.repeat("_ ", hangman.word().length()));
 
@@ -59,6 +58,7 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
 
     @Override
     public void onGameDone(@NonNull HangmanWrapper hangman, boolean wonGame) {
+        hangman.removeGameDoneCallback(this).removeGameStartCallback(this);
         mChronometer.stop();
         String message = getString(R.string.game_lost, hangman.word());
 
@@ -73,12 +73,9 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(message);
         builder.setCancelable(false);
-        builder.setPositiveButton("OK", (dialog, id) -> {
-            getFragmentManager().beginTransaction()
-                    .remove(this)
-                    .add(R.id.fragmentView, new Menu())
-                    .commit();
-        });
+        builder.setPositiveButton("OK", (dialog, id) ->
+                getFragmentManager().popBackStack()
+        );
         AlertDialog alert = builder.create();
         alert.show();
     }

@@ -1,5 +1,6 @@
 package dk.lost_world.Hangman;
 
+import android.content.IntentSender;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
 import dk.lost_world.Hangman.Hangman.HangmanWrapper;
+import dk.lost_world.Hangman.Hangman.OnFetchedWordsDoneListener;
+import dk.lost_world.Hangman.Hangman.OnFetchedWordsFailedListener;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
@@ -32,9 +35,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
                 .build();
 
+        Menu menu = new Menu();
         getFragmentManager().beginTransaction()
-                .add(R.id.fragmentView, new Menu())
+                .add(R.id.fragmentView, menu)
                 .commit();
+
+        HangmanWrapper.getInstance()
+                .addFetchedWordsFailedCallback(menu)
+                .addFetchedWordsDoneCallback(menu)
+                .fetchWordsFromDr();
     }
 
 
@@ -61,6 +70,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("Connection failed", connectionResult.toString());
+        try {
+            connectionResult.startResolutionForResult(this, connectionResult.getErrorCode());
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
     }
+
 }

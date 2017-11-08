@@ -9,6 +9,7 @@
         android:id="@+id/start"
         android:layout_width="0dp"
         android:layout_height="95dp"
+        android:visibility="invisible"
         android:text="@string/start"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"

@@ -1,5 +1,7 @@
 package dk.lost_world.Hangman.Hangman;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -121,21 +123,24 @@ class Hangman {
         return sb.toString();
     }
 
-    public void fetchWordsFromDr() throws Exception {
-        String data = fetchWordsFromURL("http://dr.dk");
-        //System.out.println("data = " + data);
+    public void fetchWordsFromDr() throws IOException {
+        String data = fetchWordsFromURL("https://dr.dk");
 
         data = data.substring(data.indexOf("<body")). // fjern headere
                 replaceAll("<.+?>", " ").toLowerCase(). // fjern tags
+                replaceAll("&#198;", "æ"). // erstat HTML-tegn
+                replaceAll("&#230;", "æ"). // erstat HTML-tegn
+                replaceAll("&#216;", "ø"). // erstat HTML-tegn
+                replaceAll("&#248;", "ø"). // erstat HTML-tegn
+                replaceAll("&oslash;", "ø"). // erstat HTML-tegn
+                replaceAll("&#229;", "å"). // erstat HTML-tegn
                 replaceAll("[^a-zæøå]", " "). // fjern tegn der ikke er bogstaver
-                replaceAll(" [a-zæøå] ", " "). // fjern 1-bogstavsord
-                replaceAll(" [a-zæøå][a-zæøå] ", " "); // fjern 2-bogstavsord
+                replaceAll(" [a-zæøå] "," "). // fjern 1-bogstavsord
+                replaceAll(" [a-zæøå][a-zæøå] "," "); // fjern 2-bogstavsord
 
-        System.out.println("data = " + data);
         possibleWords.clear();
         possibleWords.addAll(new HashSet<>(Arrays.asList(data.split(" "))));
 
-        System.out.println("possibleWords = " + possibleWords);
         reset();
     }
 }
