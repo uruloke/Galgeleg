@@ -31,7 +31,6 @@ public class Menu extends Fragment implements View.OnClickListener, GoogleApiCli
     private Button scoreButton;
     private ImageButton settingButton;
     private SharedPreferences preferences;
-    private View coordinatorLayout;
     private Snackbar failedFetchingSnackbar;
     private Snackbar tryingToFetchSnackbar;
 
