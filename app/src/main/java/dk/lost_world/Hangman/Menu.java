@@ -32,7 +32,8 @@ public class Menu extends Fragment implements View.OnClickListener, GoogleApiCli
     private ImageButton settingButton;
     private SharedPreferences preferences;
     private View coordinatorLayout;
-    private Snackbar snackbar;
+    private Snackbar failedFetchingSnackbar;
+    private Snackbar tryingToFetchSnackbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +51,10 @@ public class Menu extends Fragment implements View.OnClickListener, GoogleApiCli
 
         mGoogleApiClient.registerConnectionCallbacks(this);
 
-        snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinatorLayout), R.string.UnableToConnectMessage, Snackbar.LENGTH_LONG);
+        View coordinatorLayout = getActivity().findViewById(R.id.coordinatorLayout);
+        failedFetchingSnackbar = Snackbar.make(coordinatorLayout, R.string.UnableToConnectMessage, Snackbar.LENGTH_LONG);
+        tryingToFetchSnackbar = Snackbar.make(coordinatorLayout, "Fetching...", Snackbar.LENGTH_SHORT);
+
 
         if(preferences.getBoolean(getString(R.string.useDr), true )) {
             HangmanWrapper.getInstance().removePossibleWords().fetchWordsFromDr();
@@ -115,12 +119,13 @@ public class Menu extends Fragment implements View.OnClickListener, GoogleApiCli
         playButton.setEnabled(false);
         preferences.edit().putBoolean(getString(R.string.useDr), false).apply();
         HangmanWrapper.getInstance().removePossibleWords().addDefaultWords();
-        snackbar.show();
+        failedFetchingSnackbar.show();
     }
 
     @Override
     public void onFetchedWordsStart(@NonNull HangmanWrapper hangman) {
         Log.d("FETCHING", "START");
         playButton.setEnabled(false);
+        tryingToFetchSnackbar.show();
     }
 }
