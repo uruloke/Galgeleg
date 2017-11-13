@@ -2,8 +2,6 @@ package dk.lost_world.Hangman.Hangman;
 
 import java.util.ArrayList;
 
-import dk.lost_world.Hangman.SettingsDialog;
-
 public class HangmanWrapper extends Hangman {
 
     private ArrayList<OnGameDoneListener> gameDoneListeners = new ArrayList<>();

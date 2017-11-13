@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,15 +21,13 @@ import com.google.android.gms.games.Games;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-
 import dk.lost_world.Hangman.Hangman.HangmanWrapper;
 import dk.lost_world.Hangman.Hangman.OnGameDoneListener;
 import dk.lost_world.Hangman.Hangman.OnGameStartListener;
 
 import static dk.lost_world.Hangman.MainActivity.mGoogleApiClient;
 
-public class Game extends Fragment implements OnGameDoneListener, OnGameStartListener, View.OnClickListener {
+public class Game extends Fragment implements OnGameDoneListener, OnGameStartListener, AdapterView.OnItemClickListener {
 
     protected HangmanWrapper hangman;
     protected TextView word;
@@ -48,9 +48,9 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
 
         word.setText(StringUtils.repeat("_ ", hangman.word().length()));
 
-        ArrayList<View> allButtons;
-        allButtons = root.findViewById(R.id.gridLayout).getTouchables();
-        allButtons.forEach(view -> view.setOnClickListener(this));
+        GridView gridView = root.findViewById(R.id.gridView);
+        gridView.setAdapter(new AlphabetAdapter(root.getContext()));
+        gridView.setOnItemClickListener(this);
 
         hangman.start();
         return root;
@@ -90,14 +90,15 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
         mChronometer.start();
     }
 
+
     @Override
-    public void onClick(View v) {
-        Button button = ((Button) v);
-        hangman.guess(Character.toLowerCase(button.getText().charAt(0)));
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        TextView alphabetView = (TextView) view;
+        hangman.guess(Character.toLowerCase(alphabetView.getText().charAt(0)));
         word.setText(StringUtils.replace(hangman.currentVisibleWord(), "*", "_ "));
 
         setHangmanImageByWrongGuesses();
-        button.setEnabled(false);
+        alphabetView.setEnabled(false);
     }
 
     private void setHangmanImageByWrongGuesses() {
