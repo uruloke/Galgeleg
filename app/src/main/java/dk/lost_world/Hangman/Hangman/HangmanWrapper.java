@@ -1,19 +1,16 @@
 package dk.lost_world.Hangman.Hangman;
 
-import android.os.AsyncTask;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
-import dk.lost_world.Hangman.MainActivity;
+import dk.lost_world.Hangman.SettingsDialog;
 
 public class HangmanWrapper extends Hangman {
 
-    private ArrayList<OnGameDoneListener> gameDoneListeners;
-    private ArrayList<OnGameStartListener> gameStartListeners;
-    private ArrayList<OnFetchedWordsDoneListener> fetchedWordsDoneListeners;
-    private ArrayList<OnFetchedWordsFailedListener> fetchedWordsFailedListeners;
+    private ArrayList<OnGameDoneListener> gameDoneListeners = new ArrayList<>();
+    private ArrayList<OnGameStartListener> gameStartListeners = new ArrayList<>();
+    private ArrayList<OnFetchedWordsDoneListener> fetchedWordsDoneListeners = new ArrayList<>();
+    private ArrayList<OnFetchedWordsFailedListener> fetchedWordsFailedListeners = new ArrayList<>();
+    private ArrayList<OnFetchedWordsStartListener> fetchedWordsStartListeners = new ArrayList<>();
     private boolean started = false;
 
     private static final HangmanWrapper instance = new HangmanWrapper();
@@ -24,15 +21,17 @@ public class HangmanWrapper extends Hangman {
 
     private HangmanWrapper() {
         super();
-        gameDoneListeners = new ArrayList<>();
-        gameStartListeners = new ArrayList<>();
-        fetchedWordsDoneListeners = new ArrayList<>();
-        fetchedWordsFailedListeners = new ArrayList<>();
     }
 
     public HangmanWrapper start() {
         started = true;
         gameStartListeners.forEach(gameStartListener -> gameStartListener.onGameStart(this));
+        return this;
+    }
+
+    public HangmanWrapper removePossibleWords()
+    {
+        this.possibleWords.clear();
         return this;
     }
 
@@ -83,6 +82,11 @@ public class HangmanWrapper extends Hangman {
         return this;
     }
 
+    public HangmanWrapper addFetchedWordsStartCallback(OnFetchedWordsStartListener fetchedWordsStartListener) {
+        fetchedWordsStartListeners.add(fetchedWordsStartListener);
+        return this;
+    }
+
     public ArrayList<OnFetchedWordsDoneListener> getFetchedWordsDoneListeners() {
         return fetchedWordsDoneListeners;
     }
@@ -107,7 +111,25 @@ public class HangmanWrapper extends Hangman {
 
     @Override
     public void fetchWordsFromDr() {
+        this.fetchedWordsStartListeners.forEach(fetchedWordsStartListener -> fetchedWordsStartListener.onFetchedWordsStart(this));
         new FetchFromUrlTask(this).execute((RunnableException) super::fetchWordsFromDr);
     }
 
+    public void addDefaultWords() {
+        this.fetchedWordsStartListeners.forEach(fetchedWordsStartListener -> fetchedWordsStartListener.onFetchedWordsStart(this));
+        possibleWords.add("bil");
+        possibleWords.add("computer");
+        possibleWords.add("programmering");
+        possibleWords.add("motorvej");
+        possibleWords.add("busrute");
+        possibleWords.add("gangsti");
+        possibleWords.add("skovsnegl");
+        possibleWords.add("solsort");
+        this.fetchedWordsDoneListeners.forEach(fetchedWordsDoneListener -> fetchedWordsDoneListener.onFetchedWordsDone(this));
+    }
+
+    public HangmanWrapper removeFetchedWordsFailedCallback(OnFetchedWordsFailedListener fetchedWordsFailedListener) {
+        fetchedWordsFailedListeners.remove(fetchedWordsFailedListener);
+        return this;
+    }
 }

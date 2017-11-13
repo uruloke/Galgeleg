@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 class Hangman {
-    private ArrayList<String> possibleWords = new ArrayList<>();
+    protected ArrayList<String> possibleWords = new ArrayList<>();
     private String word;
     private ArrayList<String> usedLetters = new ArrayList<>();
     private String visibleWord;

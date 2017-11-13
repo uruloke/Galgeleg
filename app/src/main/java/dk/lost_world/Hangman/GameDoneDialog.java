@@ -1,6 +1,5 @@
 package dk.lost_world.Hangman;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,8 +17,6 @@ public class GameDoneDialog extends DialogFragment implements View.OnClickListen
         frag.setArguments(args);
         return frag;
     }
-
-
 
     @Nullable
     @Override
@@ -39,6 +36,4 @@ public class GameDoneDialog extends DialogFragment implements View.OnClickListen
         this.dismiss();
         getFragmentManager().popBackStack();
     }
-
-
 }

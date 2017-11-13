@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         HangmanWrapper.getInstance()
                 .addFetchedWordsFailedCallback(menu)
-                .addFetchedWordsDoneCallback(menu)
-                .fetchWordsFromDr();
+                .addFetchedWordsStartCallback(menu)
+                .addFetchedWordsDoneCallback(menu);
     }
 
 

@@ -12,4 +12,7 @@
     <string name="license_failed">License check failed.</string>
     <string name="game_won">You won. \n\nScore: %1$d \nTime: %2$d \nWrong guesses: %3$d</string>
     <string name="game_lost">Too many wrong guesses. \nWord was: %1$s</string>
+    <string name="fetch_from_dr">Fetch words from DR </string>
+    <string name="useDr">useDR</string>
+    <string name="UnableToConnectMessage">Could not connect to DR.</string>
 </resources>

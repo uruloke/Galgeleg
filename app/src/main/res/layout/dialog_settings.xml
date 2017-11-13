@@ -1,7 +1,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
+    android:id="@+id/settingsLayout"
     android:minWidth="250dp"
     android:layout_width="250dp"
     android:layout_height="wrap_content">
@@ -30,22 +30,27 @@
         app:layout_constraintTop_toTopOf="@id/dialogTitle"
         app:layout_constraintBottom_toBottomOf="@id/dialogTitle" />
 
-    <TextView
-        android:id="@+id/messageView"
-        android:layout_width="wrap_content"
+    <Switch
+        app:layout_goneMarginStart="8dp"
+        android:id="@+id/useDRSwitch"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/game_won"
-        app:layout_constraintTop_toBottomOf="@+id/dialogTitle"
-        app:layout_constraintBottom_toTopOf="@id/closeDialog"
+        android:textAlignment="center"
+        android:text="@string/fetch_from_dr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"  />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toBottomOf="@id/dialogTitle"
+        />
+
+
 
     <Button
         android:id="@+id/closeDialog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="OK"
+        android:text="Close"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
@@ -53,7 +58,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/messageView"/>
-
+        app:layout_constraintTop_toBottomOf="@id/useDRSwitch"/>
 
 </android.support.constraint.ConstraintLayout>

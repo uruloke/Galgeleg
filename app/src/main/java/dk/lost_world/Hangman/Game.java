@@ -78,7 +78,6 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
         }
 
         GameDoneDialog dialog = GameDoneDialog.newInstance(message);
-
         dialog.show(getFragmentManager(), "gameDoneDialog");
     }
 
