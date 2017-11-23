@@ -74,7 +74,10 @@ public class Game extends Fragment implements OnGameDoneListener, OnGameStartLis
             long score =  time * (hangman.wrongGuesses()+1);
             message = getString(R.string.game_won, score, time / 1000, hangman.wrongGuesses());
 
-            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_score), score);
+            if(MainActivity.mGoogleApiClient.isConnected()) {
+                Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_score), score);
+            }
+
         }
 
         GameDoneDialog dialog = GameDoneDialog.newInstance(message);
